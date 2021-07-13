@@ -1,0 +1,60 @@
+{
+	"name": "Go",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Update the VARIANT arg to pick a version of Go: latest, 1.16, 1.15
+			"VARIANT": "1.16",
+			// Options
+			"INSTALL_NODE": "false",
+			"NODE_VERSION": "lts/*"
+		}
+	},
+	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+		
+	// "workspaceMount": "source=${localWorkspaceFolder},target=/go/src/gin-simple,type=bind,consistency=delegated",
+	// "workspaceFolder": "/go/src/gin-simple",
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.defaultProfile.linux": "/bin/bash",
+		"editor.wordWrap": "on",
+		"go.toolsManagement.checkForUpdates": "local",
+		"go.useLanguageServer": true,
+		"go.gopath": "/go",
+		"go.goroot": "/usr/local/go",
+		"go.lintTool": "golangci-lint",
+		"go.lintOnSave": "workspace",
+		"go.formatTool": "goimports",
+		"go.useCodeSnippetsOnFunctionSuggest": true,
+		"go.autocompleteUnimportedPackages": true,
+		"go.docsTool": "gogetdoc",
+		"[go]":{
+			"editor.defaultFormatter": "golang.go",
+			"editor.formatOnSave": true,
+			"editor.minimap.enabled": true,
+		},
+		"gopls": {
+			"usePlaceholders": true, // add parameter placeholders when completing a function
+			"completionDocumentation": true // for documentation in completion items
+		},
+		"explorer.confirmDelete": false,
+		"code-runner.runInTerminal": true,
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"golang.Go",
+		// "golang.go-nightly",
+		"ivory-lab.jenkinsfile-support",
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "go get golang.org/x/tools/gopls@latest",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}
